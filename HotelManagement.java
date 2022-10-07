@@ -76,23 +76,37 @@ public class HotelManagement extends Application
 	{
 		
 		Text userName = new Text ("Username: ");
+		userName.setPrefWidth(110);
 	 	nameSpace = new TextField();
+	 	nameSpace.setPrefWidth(110);
 	    
 	  	Text password = new Text ("Password: ");
+	  	password.setPrefWidth(110);
     	passwordSpace = new TextField();
+    	passwordSpace.setPrefWidth(110);
     	
     	Button back = new Button ("Return");
+    	back.setPrefWidth(110);
 		back.setOnAction(this::processReturnButton);
 	    	
-	   	FlowPane pane = new FlowPane (userName, nameSpace, password, passwordSpace, back);
-		pane.setAlignment(Pos.CENTER);
-		pane.setHgap(15);
-		pane.setVgap(5);
+	    GridPane inputPane = new GridPane();
+    	GridPane mainPane  = new GridPane();
+    	
+    	inputPane.setAlignment(Pos.CENTER);
+		mainPane.setAlignment(Pos.CENTER);
 		
-		Scene scene = new Scene (pane, 300, 300);
+		GridPane.setHalignment(userName, HPos.CENTER);
+		GridPane.setHalignment(nameSpace, HPos.CENTER);
+		GridPane.setHalignment(password, HPos.CENTER);
+		GridPane.setHalignment(passwordSpace, HPos.CENTER);
+		GridPane.setHalignment(back, HPos.CENTER);
 		
-		window.setScene (scene);
-		window.show();
+		inputPane.add(userName,		0,0,1,1);
+		inputPane.add(nameSpace,	1,0,1,1);
+		inputPane.add(password, 	2,0,1,1);
+		inputPane.add(passwordSpace,0,0,1,1);
+		inputPane.add(back,			1,0,1,1);
+		
 	   
 	}
 	
