@@ -16,6 +16,7 @@ public class HotelManagement extends Application
 	private Text hotelName;
 	Button logIn;
 	Button createAccount;
+	Button adminLogIn;
 	Button back;
 	Button enter;
 	
@@ -36,6 +37,12 @@ public class HotelManagement extends Application
 	private TextField insertPasswordSpace;
 	private TextField confirmPasswordSpace;
 	
+	// If AdminlogIn;
+	
+	private Text adminUserName;
+	private Text adminPassword;
+	private TextField adminNameSpace;
+	private TextField adminPasswordSpace;
 	
 	
 	Stage window;
@@ -78,20 +85,26 @@ public class HotelManagement extends Application
 		createAccount.setPrefWidth(300);
 		createAccount.setOnAction(this::processCreateAccountButton);
 		
+		Button adminLogIn = new Button ("AdminLogIn");
+		adminLogIn.setPrefWidth(300);
+		adminLogIn.setOnAction(this::processAdminLogInButton);
+		
 		GridPane mainPane  = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
 		
 		GridPane.setHalignment(hotelName, HPos.CENTER);
 		GridPane.setHalignment(logIn, HPos.CENTER);
 		GridPane.setHalignment(createAccount, HPos.CENTER);
+		GridPane.setHalignment(adminLogIn, HPos.CENTER);
 		
 		mainPane.add(hotelName,     0,0,1,1);
 		mainPane.add(logIn,     	0,1,1,1);
 		mainPane.add(createAccount, 0,2,1,1);
+		mainPane.add(adminLogIn,    0,3,1,1);
 		
 		mainPane.setVgap(40);
 		
-		Scene scene = new Scene(mainPane, 700, 700);
+		Scene scene = new Scene(mainPane, 900, 900);
 		window.setScene(scene);
 		window.show();
 	    
@@ -157,11 +170,77 @@ public class HotelManagement extends Application
 		inputPane3.setHgap(40);
 		mainPane.setVgap(40);
 		
-		Scene scene = new Scene(mainPane, 700, 700);
+		Scene scene = new Scene(mainPane, 900, 900);
 		window.setScene(scene);
 		window.show();
 		
-	}	
+	}
+
+	public void processAdminLogInButton(ActionEvent event)
+	{
+		Text adminUserName = new Text ("Admin name: ");
+		adminUserName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 36));
+	 	adminNameSpace = new TextField();
+	 	adminNameSpace.setPrefWidth(150);
+	    
+	  	Text adminPassword = new Text ("Password: ");
+	  	adminPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 36));
+    	adminPasswordSpace = new TextField();
+    	adminPasswordSpace.setPrefWidth(150);
+    	
+    	Button back = new Button ("Return");
+    	back.setPrefWidth(150);
+		back.setOnAction(this::processReturnButton);
+		
+		Button enter = new Button ("Enter");
+    	enter.setPrefWidth(150);
+		enter.setOnAction(this::processEnterButtonForAdminLogIn);
+		
+		GridPane inputPane1 = new GridPane();
+		GridPane inputPane2 = new GridPane();
+		GridPane inputPane3 = new GridPane();
+    	GridPane mainPane  = new GridPane();
+    	
+    	inputPane1.setAlignment(Pos.CENTER);
+    	inputPane2.setAlignment(Pos.CENTER);
+    	inputPane3.setAlignment(Pos.CENTER);
+		mainPane.setAlignment(Pos.CENTER);
+		
+		
+		GridPane.setHalignment(adminUserName, HPos.CENTER);
+		GridPane.setHalignment(adminNameSpace, HPos.CENTER);
+		
+		GridPane.setHalignment(adminPassword, HPos.CENTER);
+		GridPane.setHalignment(adminPasswordSpace, HPos.CENTER);
+		
+		GridPane.setHalignment(back, HPos.CENTER);
+		GridPane.setHalignment(enter, HPos.CENTER);
+		
+		
+		inputPane1.add(adminUserName,    0,0,1,1);
+		inputPane1.add(adminNameSpace,	1,0,1,1);
+		
+		inputPane2.add(adminPassword,      0,0,1,1);
+		inputPane2.add(adminPasswordSpace, 1,0,1,1);
+		
+		inputPane3.add(back,    0,0,1,1);
+		inputPane3.add(enter, 	1,0,1,1);
+		
+		mainPane.add(inputPane1,   0,0,1,1);
+		mainPane.add(inputPane2,   0,1,1,1);
+		mainPane.add(inputPane3,   0,2,1,1);
+		
+		
+		inputPane1.setHgap(40);
+		inputPane2.setHgap(40);
+		inputPane3.setHgap(40);
+		mainPane.setVgap(40);
+		
+		Scene scene = new Scene(mainPane, 900, 900);
+		window.setScene(scene);
+		window.show();
+		
+	}
 	
 	public void processCreateAccountButton(ActionEvent event)
 	{    
@@ -238,7 +317,7 @@ public class HotelManagement extends Application
 		inputPane4.setHgap(40);
 		mainPane.setVgap(40);
 		
-		Scene scene = new Scene(mainPane, 700, 700);
+		Scene scene = new Scene(mainPane, 900, 900);
 		window.setScene(scene);
 		window.show();
     	
@@ -247,7 +326,6 @@ public class HotelManagement extends Application
 	
 	public void processReturnButton(ActionEvent event)
 	{
-		
 		Text hotelName = new Text ("<HOTEL NAME>");
 		hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 36));
 		
@@ -259,23 +337,29 @@ public class HotelManagement extends Application
 		createAccount.setPrefWidth(300);
 		createAccount.setOnAction(this::processCreateAccountButton);
 		
+		Button adminLogIn = new Button ("AdminLogIn");
+		adminLogIn.setPrefWidth(300);
+		adminLogIn.setOnAction(this::processAdminLogInButton);
+		
 		GridPane mainPane  = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
 		
 		GridPane.setHalignment(hotelName, HPos.CENTER);
 		GridPane.setHalignment(logIn, HPos.CENTER);
 		GridPane.setHalignment(createAccount, HPos.CENTER);
+		GridPane.setHalignment(adminLogIn, HPos.CENTER);
 		
 		mainPane.add(hotelName,     0,0,1,1);
 		mainPane.add(logIn,     	0,1,1,1);
 		mainPane.add(createAccount, 0,2,1,1);
+		mainPane.add(adminLogIn,    0,3,1,1);
 		
 		mainPane.setVgap(40);
 		
-		Scene scene = new Scene(mainPane, 700, 700);
+		Scene scene = new Scene(mainPane, 900, 900);
 		window.setScene(scene);
 		window.show();
-		
+	
 	}
 	
 	public void processEnterButtonForLogIn(ActionEvent event)
@@ -289,6 +373,11 @@ public class HotelManagement extends Application
 		String cUserId = userIdSpace.getText();
 		String cInsertPassword = insertPasswordSpace.getText();
 		String cConfirmPassword = confirmPasswordSpace.getText();
+	}
+	public void processEnterButtonForAdminLogIn(ActionEvent event)
+	{	
+		String uAdminName = adminNameSpace.getText();
+		String uAdminPassword = adminPasswordSpace.getText();
 	}
 	
 }
