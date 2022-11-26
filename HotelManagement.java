@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -7,7 +9,14 @@ import javafx.scene.text.*;
 import javafx.geometry.*;	
 import javafx.event.ActionEvent;
 import javafx.scene.text.FontWeight; 
-import javafx.scene.text.FontWeight; 
+import javafx.scene.text.FontWeight;
+import java.time.LocalDate;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+ 
 import java.sql.*;
 
 public class HotelManagement extends Application 
@@ -46,51 +55,58 @@ public class HotelManagement extends Application
 	
 	//If HotelBooking
 	
-	private Text name;
-	private Text numberOfGuests;
-	private Text numberOfBeds;
-	private Text numberOfNights;
-	private Button luxury;
-	private Button modest;
-	private Button reset;
-	private Text intro1;
-	private Text intro2;
-	private TextField field1;
-	private TextField field2;
-	private TextField field3;
-	private TextField field4;
+	private Text intro;
+	private Text checkInDate;
+	private Text numOfGuests;
+	private Text roomType;
+	private Text roomNum;
+	private Text numDays;
+	private ComboBox<String>  roomTypeBox;
+	private ComboBox<String>  numOfGuestBox;
+	private TextField roomNumSpace;
+	private TextField numDaysSpace;
+	Button clear;
+	Button book;
 	
 	
 	Stage window;
 	Connection con = null;
 	
-	public void start(Stage primaryStage) 
+	public void start(Stage primaryStage) throws FileNotFoundException
 	{
 		window = primaryStage;
 		
-		try
-		{
-			Class.forName("com.mysql.cj.jbdc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=root", "root", "SumitrBanik00");
+		// try
+// 		{
+// 			Class.forName("com.mysql.cj.jbdc.Driver");
+// 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=root", "root", "SumitrBanik00");
+// 
+// 			Statement s = con.createStatement();
+// 			ResultSet r=s.executeQuery("select * from Users;");
+// 			r.next();
+// 			String testName = r.getString("U_Password");
+// 			System.out.println(testName);
+// 			s.close();
+// 			con.close();
+// 		}
+// 		catch(ClassNotFoundException e)
+// 		{
+// 			e.printStackTrace();
+// 		}
+// 		catch(SQLException e)
+// 		{
+// 			e.printStackTrace();
+// 		}
 
-			Statement s = con.createStatement();
-			ResultSet r=s.executeQuery("select * from Users;");
-			r.next();
-			String testName = r.getString("U_Password");
-			System.out.println(testName);
-			s.close();
-			con.close();
-		}
-		catch(ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
+		Image image = new Image(new FileInputStream("/Users/ayushbhosale/Documents/FA22/CS2043/Project/Panthera.png"));
+		ImageView view = new ImageView(image);
+		view.setX(50);
+		view.setY(50);
+		view.setFitHeight(100);
+		view.setFitWidth(200);
+		Group root = new Group(view);
 		
-		Text hotelName = new Text ("<HOTEL NAME>");
+		Text hotelName = new Text ("PANTHERA");
 		hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		
 		Button logIn = new Button ("LogIn");
@@ -104,24 +120,28 @@ public class HotelManagement extends Application
 		Button adminLogIn = new Button ("AdminLogIn");
 		adminLogIn.setPrefWidth(300);
 		adminLogIn.setOnAction(this::processAdminLogInButton);
-		
+	
+                
 		GridPane mainPane  = new GridPane();
 		mainPane.setAlignment(Pos.CENTER);
 		
+		GridPane.setHalignment(root, HPos.CENTER);
 		GridPane.setHalignment(hotelName, HPos.CENTER);
 		GridPane.setHalignment(logIn, HPos.CENTER);
 		GridPane.setHalignment(createAccount, HPos.CENTER);
 		GridPane.setHalignment(adminLogIn, HPos.CENTER);
 		
-		mainPane.add(hotelName,     0,0,1,1);
-		mainPane.add(logIn,     	0,1,1,1);
-		mainPane.add(createAccount, 0,2,1,1);
-		mainPane.add(adminLogIn,    0,3,1,1);
+		mainPane.add(root,    		0,0,1,1);
+		mainPane.add(hotelName,     0,1,1,1);
+		mainPane.add(logIn,     	0,2,1,1);
+		mainPane.add(createAccount, 0,3,1,1);
+		mainPane.add(adminLogIn,    0,4,1,1);
 		
 		mainPane.setVgap(40);
 		
 		Scene scene = new Scene(mainPane, 900, 900);
-		window.setScene(scene);
+		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        window.setScene(scene);
 		window.show();
 	    
 	}
@@ -132,6 +152,7 @@ public class HotelManagement extends Application
 		userName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 	 	nameSpace = new TextField();
 	 	nameSpace.setPrefWidth(150);
+	    
 	    
 	  	Text password = new Text ("Password: ");
 	  	password.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
@@ -314,9 +335,9 @@ public class HotelManagement extends Application
 	}
 	
 	
-	public void processReturnButton(ActionEvent event)
-	{
-		Text hotelName = new Text ("<HOTEL NAME>");
+	public void processReturnButton(ActionEvent event) 
+	{	
+		Text hotelName = new Text ("PANTHERA");
 		hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		
 		Button logIn = new Button ("LogIn");
@@ -344,7 +365,6 @@ public class HotelManagement extends Application
 		mainPane.add(createAccount, 0,2,1,1);
 		mainPane.add(adminLogIn,    0,3,1,1);
 		
-		
 		mainPane.setVgap(40);
 		
 		Scene scene = new Scene(mainPane, 900, 900);
@@ -355,95 +375,103 @@ public class HotelManagement extends Application
 	
 	public void processEnterButtonForLogIn(ActionEvent event)
 	{	
-		name = new Text("Name:");
-		name.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		intro = new Text("Room Selection");
+		intro.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 		
-		numberOfGuests = new Text("Number of Guests:");
-		numberOfGuests.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		roomType = new Text("Room Type:");
+		roomType.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		
-		numberOfBeds = new Text("Number of Beds:");
-		numberOfBeds.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		numOfGuests = new Text("Number of Guests:");
+		numOfGuests.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		
-		numberOfNights = new Text("Number of Nights:");
-		numberOfNights.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		checkInDate = new Text("Check In Date:");
+		checkInDate.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		
-		intro1 = new Text("Welcome to The Golden Dragon Inn!");
-		intro1.setFont(Font.font("Roboto Blacak", FontPosture.REGULAR, 25));
+		roomNum = new Text("Room Number:");
+		roomNum.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		roomNumSpace = new TextField();
+	 	roomNumSpace.setPrefWidth(150);
+	 	
+	 	numDays = new Text("Number of days of stay:");
+		numDays.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		numDaysSpace = new TextField();
+	 	numDaysSpace.setPrefWidth(150);
 		
-		intro2 = new Text("Take Note of Your check-out time.   Enter Your information.");
-		intro2.setFont(Font.font("Roboto Blacak", FontPosture.REGULAR, 25));
-	
-		luxury = new Button("Luxury");
-		luxury.setPrefWidth(150);
-		luxury.setOnAction(this::eventHandler1);
+		Button clear = new Button ("Clear");
+		clear.setPrefWidth(300);
+		clear.setOnAction(this::processClearButton);
 		
-		modest = new Button("Modest");
-		modest.setPrefWidth(150);
-		modest.setOnAction(this::eventHandler2);
+		Button book = new Button ("Book");
+		book.setPrefWidth(300);
+		book.setOnAction(this::processBookButton);
 		
-		Button back = new Button ("Return");
-		back.setPrefWidth(150);
-		back.setOnAction(this::processReturnButton);
-	
-		field1 = new TextField();
-		field1.setPrefWidth(140);
-	
-		field2 = new TextField();
-		field2.setPrefWidth(60);
-
-		field3 = new TextField();
-		field3.setPrefWidth(70);
-
-		field4 = new TextField();
-		field4.setPrefWidth(40);	
-	
-		GridPane inputPane  = new GridPane();
-		GridPane buttonPane = new GridPane();
-		GridPane mainPane   = new GridPane();
-	
-		inputPane.setAlignment(Pos.CENTER);
-		buttonPane.setAlignment(Pos.CENTER);
+		
+		roomTypeBox = new ComboBox<String>();
+        roomTypeBox.getItems().add("Standard Suite");
+        roomTypeBox.getItems().add("Junior Suite");
+        roomTypeBox.getItems().add("Presidential Suite");
+        roomTypeBox.getItems().add("Penthouse Suite");
+		roomTypeBox.getItems().add("Honeymoon Suite");
+		
+		numOfGuestBox = new ComboBox<String>();
+		numOfGuestBox.getItems().add("1");
+		numOfGuestBox.getItems().add("2");
+ 		numOfGuestBox.getItems().add("3");
+ 	 	numOfGuestBox.getItems().add("4");
+ 	 	numOfGuestBox.getItems().add("5");
+ 	 	numOfGuestBox.getItems().add("6");
+ 	 	
+ 	 	DatePicker d = new DatePicker();
+ 	 	HBox box = new HBox(5);
+      	box.setPadding(new Insets(15, 50, 50, 50));
+     	box.getChildren().addAll(d);
+	 	
+	 	GridPane inputPane = new GridPane();
+    	GridPane mainPane  = new GridPane();
+    	
+    	inputPane.setAlignment(Pos.CENTER);
 		mainPane.setAlignment(Pos.CENTER);
-	
-		GridPane.setHalignment(field1, HPos.CENTER);
-		GridPane.setHalignment(field2, HPos.CENTER);
-		GridPane.setHalignment(field3, HPos.CENTER);
-		GridPane.setHalignment(field4, HPos.CENTER);
-		GridPane.setHalignment(name, HPos.CENTER);
-		GridPane.setHalignment(numberOfGuests, HPos.CENTER);
-		GridPane.setHalignment(numberOfBeds, HPos.CENTER);
-		GridPane.setHalignment(numberOfNights, HPos.CENTER);
-		GridPane.setHalignment(intro1, HPos.CENTER);
-		GridPane.setHalignment(intro2, HPos.CENTER);
-		GridPane.setHalignment(luxury, HPos.CENTER);
-		GridPane.setHalignment(modest, HPos.CENTER);
-		GridPane.setHalignment(back, HPos.CENTER);
-	
-		inputPane.add(name, 0,0,1,1);
-		inputPane.add(field1, 1,0,1,1);
-		inputPane.add(numberOfGuests, 2,0,1,1);
-		inputPane.add(field2, 3,0,1,1);
-		inputPane.add(numberOfBeds, 0,1,1,1);
-		inputPane.add(field3, 1,1,1,1);
-		inputPane.add(numberOfNights, 2,1,1,1);
-		inputPane.add(field4, 3,1,1,1);
 		
-		buttonPane.add(luxury, 0,2,1,1);
-		buttonPane.add(modest, 1,2,1,1);
-		buttonPane.add(back, 2,2,1,1);
+		GridPane.setHalignment(intro, HPos.CENTER);
+		GridPane.setHalignment(roomType, HPos.CENTER);
+		GridPane.setHalignment(numOfGuests, HPos.CENTER);
+		GridPane.setHalignment(roomNum, HPos.CENTER);
+		GridPane.setHalignment(roomTypeBox, HPos.CENTER);
+		GridPane.setHalignment(checkInDate, HPos.CENTER);
+		GridPane.setHalignment(box, HPos.CENTER);
+		GridPane.setHalignment(numOfGuestBox, HPos.CENTER);
+		GridPane.setHalignment(numDays, HPos.CENTER);
+		GridPane.setHalignment(numDaysSpace, HPos.CENTER);
+		GridPane.setHalignment(roomNumSpace, HPos.CENTER);
+		GridPane.setHalignment(clear, HPos.CENTER);
+		GridPane.setHalignment(book, HPos.CENTER);
 		
-		mainPane.add(inputPane, 0,0,1,1);
-		mainPane.add(buttonPane, 0,1,1,1);
-		mainPane.add(intro1, 0,2,1,1);
-		mainPane.add(intro2, 0,3,1,1);
+		inputPane.add(intro,    0,0,1,1);
 		
-	
-		inputPane.setVgap(22);
-		inputPane.setHgap(22);
-		buttonPane.setHgap(42);
-		buttonPane.setVgap(12);
-		mainPane.setVgap(22);
-	
+		inputPane.add(roomType,    	  0,1,1,1);
+		inputPane.add(roomTypeBox,    1,1,1,1);
+		
+		inputPane.add(numOfGuests,    	0,2,1,1);
+		inputPane.add(numOfGuestBox,    1,2,1,1);
+		
+		inputPane.add(checkInDate,    	0,3,1,1);
+		inputPane.add(box,    			1,3,1,1);
+		
+		inputPane.add(numDays,    	  0,4,1,1);
+		inputPane.add(numDaysSpace,   1,4,1,1);
+		
+		inputPane.add(roomNum,    	  0,5,1,1);
+		inputPane.add(roomNumSpace,   1,5,1,1);
+		
+		inputPane.add(clear,  0,6,1,1);
+		inputPane.add(book,   1,6,1,1);
+		
+		mainPane.add(inputPane,   0,0,1,1);
+		
+		inputPane.setHgap(40);
+		inputPane.setVgap(40);
+		mainPane.setVgap(40);
+		
 		Scene scene = new Scene(mainPane, 900, 900);
 		window.setScene(scene);
 		window.show();
@@ -451,9 +479,11 @@ public class HotelManagement extends Application
 
 	}
 	
-	public void processEnterButtonForCreateAccount(ActionEvent event)
+	public void processEnterButtonForCreateAccount(ActionEvent event) 
 	{
-		Text hotelName = new Text ("<HOTEL NAME>");
+		
+		
+		Text hotelName = new Text ("PANTHERA");
 		hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		
 		Button logIn = new Button ("LogIn");
@@ -477,46 +507,92 @@ public class HotelManagement extends Application
 	    
 	
 	}
+	
 	public void processEnterButtonForAdminLogIn(ActionEvent event)
 	{	
-		String uAdminName = adminNameSpace.getText();
-		String uAdminPassword = adminPasswordSpace.getText();
+		
 	}
-	public void eventHandler1(ActionEvent event)
+	
+	public void processClearButton(ActionEvent event)
 	{
-		double guests =Double.parseDouble(field2.getText());
-		double beds =Double.parseDouble(field3.getText());
-		double nights =Double.parseDouble(field4.getText());
- 
-		double cost = (30 * nights) + (10 * nights * (beds - 1));
-		intro1.setText("Your room perk is : keg of wine. Please check-out by:9am");
-		intro2.setText("Total Cost : " + cost + "gp");
+	
 	}
 	
-	public void eventHandler2(ActionEvent event)
-	{	
-		double guests =Double.parseDouble(field2.getText());
-		double beds =Double.parseDouble(field3.getText());
-		double nights =Double.parseDouble(field4.getText());
-		double cost;
-		
-		if(beds <= 2)
-			 cost = (10 * nights) + (0.5 * nights * guests);
+	private Text line1;
+	private Text line2;
+	private Text line3;
+	double priceForRoom = 0.0;
+	double totalPrice;
 	
-		else
-			 cost = (10 * nights) + (0.5 * nights * guests) + ( 1 * nights * (beds - 2));
+	public void processBookButton(ActionEvent event)
+	{
+		String op = (String)roomTypeBox.getValue();
+		double days = Double.parseDouble(numDaysSpace.getText());
 		
-		intro1.setText("Breakfast included in room cost. Please check-out by:9am");
-		intro2.setText("Total Cost : " + cost + "gp");
+		if (op.equals("Standard Suite"))
+			priceForRoom = 60.0;
+		else if (op.equals("Junior Suite"))
+			priceForRoom = 40.0;
+		else if (op.equals("Presidential Suite"))
+			priceForRoom = 250.0;
+		else if (op.equals("Penthouse Suite"))
+			priceForRoom = 150.0;
+		else if (op.equals("Honeymoon Suite"))
+			priceForRoom = 200.0; 
+		
+		totalPrice = priceForRoom * days;
+		
+		line1 = new Text("Welcome to Hotel Panthera");
+		line1.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		
+		if (op.equals("Standard Suite"))
+		{
+			line2 = new Text ("Thank you foer booking a Standard Suite with us\n");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		}
+			
+		if (op.equals("Junior Suite"))
+		{
+			line2 = new Text ("Thank you foer booking a Junior Suite with us\n");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		}
+		
+		if (op.equals("Presidential Suite"))
+		{
+			line2 = new Text ("Thank you foer booking a Presidential Suite with us\n");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		}
+		
+		if (op.equals("Penthouse Suite"))
+		{
+			line2 = new Text ("Thank you foer booking a Penthouse Suite with us\n");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		}
+		
+		if (op.equals("Honeymoon Suite"))
+		{
+			line2 = new Text ("Thank you foer booking a Honeymoon Suite with us\n");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		}
+		
+		line3 = new Text("Price for your stay is " + totalPrice);
+		line3.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		
+		GridPane mainPane  = new GridPane();
+		mainPane.setAlignment(Pos.CENTER);
+		
+		mainPane.add(line1,     0,0,1,1);
+		mainPane.add(line2,     0,1,1,1);
+		mainPane.add(line3,     0,2,1,1);
+		
+		mainPane.setVgap(40);
+		
+		Scene scene = new Scene(mainPane, 900, 900);
+		window.setScene(scene);
+		window.show();
 	}
 	
-	public void eventHandler3(ActionEvent event)
-	{  
-	        
-		
-			intro1.setText("Welcome to The Golden Dragon Inn!");
-			intro2.setText("Take Note of Your check-out time.   Enter Your information.");
-		
-	}
+	
+	
 
 }
