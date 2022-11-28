@@ -18,6 +18,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class HotelManagement extends Application 
 {
@@ -100,25 +101,31 @@ public class HotelManagement extends Application
 
 		Image image = new Image(new FileInputStream("/Users/ayushbhosale/Documents/FA22/CS2043/Project/Panthera.png"));
 		ImageView view = new ImageView(image);
-		view.setX(50);
-		view.setY(50);
-		view.setFitHeight(100);
-		view.setFitWidth(200);
+		view.setX(70);
+		view.setY(70);
+		view.setFitHeight(150);
+		view.setFitWidth(300);
 		Group root = new Group(view);
 		
 		Text hotelName = new Text ("PANTHERA");
-		hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 		
 		Button logIn = new Button ("LogIn");
 		logIn.setPrefWidth(300);
+		logIn.setPrefHeight(50);
+		logIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		logIn.setOnAction(this::processLogInButton);
 		
 		Button createAccount = new Button ("CreateAccount");
 		createAccount.setPrefWidth(300);
+		createAccount.setPrefHeight(50);
+		createAccount.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		createAccount.setOnAction(this::processCreateAccountButton);
 		
 		Button adminLogIn = new Button ("AdminLogIn");
 		adminLogIn.setPrefWidth(300);
+		adminLogIn.setPrefHeight(50);
+		adminLogIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		adminLogIn.setOnAction(this::processAdminLogInButton);
 	
                 
@@ -149,22 +156,28 @@ public class HotelManagement extends Application
 	public void processLogInButton(ActionEvent event)
 	{
 		Text userName = new Text ("Username: ");
-		userName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		userName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 	 	nameSpace = new TextField();
-	 	nameSpace.setPrefWidth(150);
+	 	nameSpace.setPrefWidth(200);
+	 	nameSpace.setPrefHeight(40);
 	    
 	    
 	  	Text password = new Text ("Password: ");
-	  	password.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+	  	password.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
     	passwordSpace = new TextField();
-    	passwordSpace.setPrefWidth(150);
+    	passwordSpace.setPrefWidth(200);
+    	passwordSpace.setPrefHeight(40);
     	
     	Button back = new Button ("Return");
     	back.setPrefWidth(150);
+    	back.setPrefHeight(30);
+    	back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		back.setOnAction(this::processReturnButton);
 		
 		Button enter = new Button ("Enter");
     	enter.setPrefWidth(150);
+    	enter.setPrefHeight(30);
+    	enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		enter.setOnAction(this::processEnterButtonForLogIn);
 		
 		GridPane inputPane = new GridPane();
@@ -209,26 +222,33 @@ public class HotelManagement extends Application
 	public void processCreateAccountButton(ActionEvent event)
 	{    
 	    Text userId = new Text ("User Id: ");
-	    userId.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+	    userId.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 	    userIdSpace = new TextField();
-	    userIdSpace.setPrefWidth(150);
+	    userIdSpace.setPrefWidth(200);
+	 	userIdSpace.setPrefHeight(40);
 	    
 	    Text insertPassword = new Text ("Password: ");
-	    insertPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+	    insertPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 	    insertPasswordSpace = new TextField();
-	    insertPasswordSpace.setPrefWidth(150);
+	    insertPasswordSpace.setPrefWidth(200);
+	 	insertPasswordSpace.setPrefHeight(40);
 	    
 		Text confirmPassword = new Text ("Confirm Password: ");
-		confirmPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		confirmPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 	    confirmPasswordSpace = new TextField();
-	    confirmPasswordSpace.setPrefWidth(150);
+	    confirmPasswordSpace.setPrefWidth(200);
+	 	confirmPasswordSpace.setPrefHeight(40);
 	    
 	    Button back = new Button ("Return");
 	    back.setPrefWidth(150);
+    	back.setPrefHeight(30);
+    	back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		back.setOnAction(this::processReturnButton);
 		
 		Button enter = new Button ("Enter");
 	    enter.setPrefWidth(150);
+    	enter.setPrefHeight(30);
+    	enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		enter.setOnAction(this::processEnterButtonForCreateAccount);
 	    
 	    GridPane inputPane = new GridPane();
@@ -279,21 +299,27 @@ public class HotelManagement extends Application
 	public void processAdminLogInButton(ActionEvent event)
 	{
 		Text adminUserName = new Text ("Admin name: ");
-		adminUserName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		adminUserName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
 	 	adminNameSpace = new TextField();
-	 	adminNameSpace.setPrefWidth(150);
+	 	adminNameSpace.setPrefWidth(200);
+	 	adminNameSpace.setPrefHeight(40);
 	    
 	  	Text adminPassword = new Text ("Password: ");
-	  	adminPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+	  	adminPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
     	adminPasswordSpace = new TextField();
-    	adminPasswordSpace.setPrefWidth(150);
+    	adminPasswordSpace.setPrefWidth(200);
+	 	adminPasswordSpace.setPrefHeight(40);
     	
     	Button back = new Button ("Return");
     	back.setPrefWidth(150);
+    	back.setPrefHeight(30);
+    	back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		back.setOnAction(this::processReturnButton);
 		
 		Button enter = new Button ("Enter");
     	enter.setPrefWidth(150);
+    	enter.setPrefHeight(30);
+    	enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		enter.setOnAction(this::processEnterButtonForAdminLogIn);
 		
 		GridPane inputPane = new GridPane();
@@ -376,34 +402,52 @@ public class HotelManagement extends Application
 	public void processEnterButtonForLogIn(ActionEvent event)
 	{	
 		intro = new Text("Room Selection");
-		intro.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
+		intro.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 60));
 		
 		roomType = new Text("Room Type:");
-		roomType.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		roomType.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		
 		numOfGuests = new Text("Number of Guests:");
-		numOfGuests.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		numOfGuests.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		
 		checkInDate = new Text("Check In Date:");
-		checkInDate.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		checkInDate.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		
 		roomNum = new Text("Room Number:");
-		roomNum.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		roomNum.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		roomNumSpace = new TextField();
-	 	roomNumSpace.setPrefWidth(150);
+	 	roomNumSpace.setPrefWidth(200);
+	 	roomNumSpace.setPrefHeight(40);
 	 	
 	 	numDays = new Text("Number of days of stay:");
-		numDays.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		numDays.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		numDaysSpace = new TextField();
-	 	numDaysSpace.setPrefWidth(150);
+	 	numDaysSpace.setPrefWidth(200);
+	 	numDaysSpace.setPrefHeight(40);
 		
 		Button clear = new Button ("Clear");
-		clear.setPrefWidth(300);
+		clear.setPrefWidth(150);
+    	clear.setPrefHeight(30);
+    	clear.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		clear.setOnAction(this::processClearButton);
 		
 		Button book = new Button ("Book");
-		book.setPrefWidth(300);
+		book.setPrefWidth(150);
+    	book.setPrefHeight(30);
+    	book.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
 		book.setOnAction(this::processBookButton);
+		
+		Button availableRooms = new Button ("Rooms");
+		availableRooms.setPrefWidth(150);
+    	availableRooms.setPrefHeight(30);
+    	availableRooms.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		availableRooms.setOnAction(this::processAvailableRoomButtonForUser);
+		
+		Button backToLogIn = new Button ("Back");
+		backToLogIn.setPrefWidth(150);
+    	backToLogIn.setPrefHeight(30);
+    	backToLogIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		backToLogIn.setOnAction(this::processBackToLogInButton);
 		
 		
 		roomTypeBox = new ComboBox<String>();
@@ -427,9 +471,11 @@ public class HotelManagement extends Application
      	box.getChildren().addAll(d);
 	 	
 	 	GridPane inputPane = new GridPane();
+	 	GridPane inputPane1 = new GridPane();
     	GridPane mainPane  = new GridPane();
     	
     	inputPane.setAlignment(Pos.CENTER);
+    	inputPane1.setAlignment(Pos.CENTER);
 		mainPane.setAlignment(Pos.CENTER);
 		
 		GridPane.setHalignment(intro, HPos.CENTER);
@@ -443,39 +489,62 @@ public class HotelManagement extends Application
 		GridPane.setHalignment(numDays, HPos.CENTER);
 		GridPane.setHalignment(numDaysSpace, HPos.CENTER);
 		GridPane.setHalignment(roomNumSpace, HPos.CENTER);
-		GridPane.setHalignment(clear, HPos.CENTER);
-		GridPane.setHalignment(book, HPos.CENTER);
+		GridPane.setHalignment(availableRooms, HPos.CENTER);
+		//GridPane.setHalignment(clear, HPos.CENTER);
+		//GridPane.setHalignment(book, HPos.CENTER);
+		//GridPane.setHalignment(backToLogIn, HPos.CENTER);
 		
-		inputPane.add(intro,    0,0,1,1);
+		inputPane.add(roomType,    	  0,0,1,1);
+		inputPane.add(roomTypeBox,    1,0,1,1);
 		
-		inputPane.add(roomType,    	  0,1,1,1);
-		inputPane.add(roomTypeBox,    1,1,1,1);
+		inputPane.add(numOfGuests,    	0,1,1,1);
+		inputPane.add(numOfGuestBox,    1,1,1,1);
 		
-		inputPane.add(numOfGuests,    	0,2,1,1);
-		inputPane.add(numOfGuestBox,    1,2,1,1);
+		inputPane.add(checkInDate,    	0,2,1,1);
+		inputPane.add(box,    			1,2,1,1);
 		
-		inputPane.add(checkInDate,    	0,3,1,1);
-		inputPane.add(box,    			1,3,1,1);
+		inputPane.add(numDays,    	  0,3,1,1);
+		inputPane.add(numDaysSpace,   1,3,1,1);
 		
-		inputPane.add(numDays,    	  0,4,1,1);
-		inputPane.add(numDaysSpace,   1,4,1,1);
+		inputPane.add(roomNum,    	  0,4,1,1);
+		inputPane.add(roomNumSpace,   1,4,1,1);
+		inputPane.add(availableRooms,   2,4,1,1);
 		
-		inputPane.add(roomNum,    	  0,5,1,1);
-		inputPane.add(roomNumSpace,   1,5,1,1);
+		inputPane.add(clear,  		0,5,1,1);
+		inputPane.add(book,   		1,5,1,1);
+		inputPane.add(backToLogIn,  2,5,1,1);
 		
-		inputPane.add(clear,  0,6,1,1);
-		inputPane.add(book,   1,6,1,1);
+		inputPane1.add(intro,    	 0,0,1,1);
+		inputPane1.add(inputPane,    0,1,1,1);
 		
-		mainPane.add(inputPane,   0,0,1,1);
 		
-		inputPane.setHgap(40);
-		inputPane.setVgap(40);
-		mainPane.setVgap(40);
+		inputPane.setHalignment(intro, HPos.CENTER);
+		inputPane.setHalignment(roomType, HPos.CENTER);
+		inputPane.setHalignment(numOfGuests, HPos.CENTER);
+		inputPane.setHalignment(roomNum, HPos.CENTER);
+		inputPane.setHalignment(roomTypeBox, HPos.CENTER);
+		inputPane.setHalignment(checkInDate, HPos.CENTER);
+		inputPane.setHalignment(box, HPos.CENTER);
+		inputPane.setHalignment(numOfGuestBox, HPos.CENTER);
+		inputPane.setHalignment(numDays, HPos.CENTER);
+		inputPane.setHalignment(numDaysSpace, HPos.CENTER);
+		inputPane.setHalignment(roomNumSpace, HPos.CENTER);
+		inputPane.setHalignment(availableRooms, HPos.CENTER);
+		//inputPane.setHalignment(clear, HPos.CENTER);
+		//inputPane.setHalignment(book, HPos.CENTER);
+		//inputPane.setHalignment(backToLogIn, HPos.CENTER);
 		
-		Scene scene = new Scene(mainPane, 900, 900);
+		mainPane.add(inputPane1,   0,0,1,1);
+		
+		inputPane.setHgap(30);
+		inputPane.setVgap(30);
+		inputPane1.setHgap(30);
+		inputPane1.setVgap(30);
+		mainPane.setVgap(30);
+		
+		Scene scene = new Scene(mainPane, 930, 930);
 		window.setScene(scene);
 		window.show();
-	
 
 	}
 	
@@ -515,7 +584,92 @@ public class HotelManagement extends Application
 	{	
 		availableRooms = new Button ("Available Rooms");
 		availableRooms.setPrefWidth(300);
-		availableRooms.setOnAction(this::processAvailableRoomButton);
+		availableRooms.setOnAction(this::processAvailableRoomButtonForAdmin);
+		
+		bookings = new Button ("Bookings");
+		bookings.setPrefWidth(300);
+		bookings.setOnAction(this::processBookingButton);
+		
+		GridPane mainPane  = new GridPane();
+		mainPane.setAlignment(Pos.TOP_LEFT);
+		
+		GridPane.setHalignment(availableRooms, HPos.LEFT);
+		GridPane.setHalignment(bookings, HPos.LEFT);
+		
+		mainPane.add(availableRooms,    0,0,1,1);
+		mainPane.add(bookings,     		1,0,1,1);
+		
+		mainPane.setVgap(40);
+		
+		Scene scene = new Scene(mainPane, 900, 900);
+		window.setScene(scene);
+		window.show();
+	}
+	
+	public void processAvailableRoomButtonForAdmin(ActionEvent event)
+	{
+		TableView<Room> table1 = new TableView<Room>();
+ 			final ObservableList<Room> data1 =
+         		FXCollections.observableArrayList(
+            	new Room(1,"Presidential Suite","Yes"),
+             	new Room(2,"Honeymoon Suite","Yes"),
+             	new Room(3,"Junior Suite","Yes"),
+             	new Room(4,"Standard Suite","Yes"),
+             	new Room(5,"Penthouse Suite","Yes")
+         	);
+ 
+    		HBox hb = new HBox();
+ 
+        	final Label label = new Label("AVAILABLE ROOMS");
+        	label.setFont(new Font("Arial", 20));
+ 
+        	table1.setEditable(true);
+        	
+        	TableColumn roomNumberCol = new TableColumn("Room Number");
+        	roomNumberCol.setMinWidth(200);
+        	roomNumberCol.setCellValueFactory(
+             	   new PropertyValueFactory<Room, Integer>("roomNumber"));
+             	   
+            TableColumn roomTypeCol = new TableColumn("Room Type");
+        	roomTypeCol.setMinWidth(200);
+        	roomTypeCol.setCellValueFactory(
+             	   new PropertyValueFactory<Room, String>("roomType"));
+ 
+            TableColumn availabilityCol = new TableColumn("Availability");
+        	availabilityCol.setMinWidth(200);
+        	availabilityCol.setCellValueFactory(
+             	   new PropertyValueFactory<Room, String>("availability"));
+             	   
+            						  
+        	Button back = new Button ("Back");
+    		back.setPrefWidth(150);
+    		back.setPrefHeight(30);
+    		back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			back.setOnAction(this::processBackButtonForAvailableRoomForAdmin);
+        	
+ 			hb.getChildren().addAll(back);
+       		hb.setSpacing(3);
+             	   
+        	table1.setItems(data1);
+        	table1.getColumns().addAll(roomNumberCol, roomTypeCol, availabilityCol);
+ 
+        	final VBox vbox = new VBox();
+        	vbox.setSpacing(5);
+        	vbox.setPadding(new Insets(10, 0, 0, 10));
+        	vbox.getChildren().addAll(label, table1, hb);
+ 
+ 			Scene scene = new Scene(new Group());
+ 			((Group) scene.getRoot()).getChildren().addAll(vbox);
+        	window.setScene(scene);
+			window.show();
+    
+	}
+	
+	public void processBackButtonForAvailableRoomForAdmin(ActionEvent event)
+	{
+		availableRooms = new Button ("Available Rooms");
+		availableRooms.setPrefWidth(300);
+		availableRooms.setOnAction(this::processAvailableRoomButtonForAdmin);
 		
 		bookings = new Button ("Bookings");
 		bookings.setPrefWidth(300);
@@ -539,9 +693,154 @@ public class HotelManagement extends Application
 	
 	public void processClearButton(ActionEvent event)
 	{
-	
+		intro = new Text("Room Selection");
+		intro.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 60));
+		
+		roomType = new Text("Room Type:");
+		roomType.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		
+		numOfGuests = new Text("Number of Guests:");
+		numOfGuests.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		
+		checkInDate = new Text("Check In Date:");
+		checkInDate.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		
+		roomNum = new Text("Room Number:");
+		roomNum.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		roomNumSpace = new TextField();
+	 	roomNumSpace.setPrefWidth(200);
+	 	roomNumSpace.setPrefHeight(40);
+	 	
+	 	numDays = new Text("Number of days of stay:");
+		numDays.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		numDaysSpace = new TextField();
+	 	numDaysSpace.setPrefWidth(200);
+	 	numDaysSpace.setPrefHeight(40);
+		
+		Button clear = new Button ("Clear");
+		clear.setPrefWidth(150);
+    	clear.setPrefHeight(30);
+    	clear.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		clear.setOnAction(this::processClearButton);
+		
+		Button book = new Button ("Book");
+		book.setPrefWidth(150);
+    	book.setPrefHeight(30);
+    	book.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		book.setOnAction(this::processBookButton);
+		
+		Button availableRooms = new Button ("Rooms");
+		availableRooms.setPrefWidth(150);
+    	availableRooms.setPrefHeight(30);
+    	availableRooms.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		availableRooms.setOnAction(this::processAvailableRoomButtonforUser);
+		
+		Button backToLogIn = new Button ("Back");
+		backToLogIn.setPrefWidth(150);
+    	backToLogIn.setPrefHeight(30);
+    	backToLogIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		backToLogIn.setOnAction(this::processBackToLogInButton);
+		
+		
+		roomTypeBox = new ComboBox<String>();
+        roomTypeBox.getItems().add("Standard Suite");
+        roomTypeBox.getItems().add("Junior Suite");
+        roomTypeBox.getItems().add("Presidential Suite");
+        roomTypeBox.getItems().add("Penthouse Suite");
+		roomTypeBox.getItems().add("Honeymoon Suite");
+		
+		numOfGuestBox = new ComboBox<String>();
+		numOfGuestBox.getItems().add("1");
+		numOfGuestBox.getItems().add("2");
+ 		numOfGuestBox.getItems().add("3");
+ 	 	numOfGuestBox.getItems().add("4");
+ 	 	numOfGuestBox.getItems().add("5");
+ 	 	numOfGuestBox.getItems().add("6");
+ 	 	
+ 	 	DatePicker d = new DatePicker();
+ 	 	HBox box = new HBox(5);
+      	box.setPadding(new Insets(15, 50, 50, 50));
+     	box.getChildren().addAll(d);
+	 	
+	 	GridPane inputPane = new GridPane();
+	 	GridPane inputPane1 = new GridPane();
+    	GridPane mainPane  = new GridPane();
+    	
+    	inputPane.setAlignment(Pos.CENTER);
+    	inputPane1.setAlignment(Pos.CENTER);
+		mainPane.setAlignment(Pos.CENTER);
+		
+		GridPane.setHalignment(intro, HPos.CENTER);
+		GridPane.setHalignment(roomType, HPos.CENTER);
+		GridPane.setHalignment(numOfGuests, HPos.CENTER);
+		GridPane.setHalignment(roomNum, HPos.CENTER);
+		GridPane.setHalignment(roomTypeBox, HPos.CENTER);
+		GridPane.setHalignment(checkInDate, HPos.CENTER);
+		GridPane.setHalignment(box, HPos.CENTER);
+		GridPane.setHalignment(numOfGuestBox, HPos.CENTER);
+		GridPane.setHalignment(numDays, HPos.CENTER);
+		GridPane.setHalignment(numDaysSpace, HPos.CENTER);
+		GridPane.setHalignment(roomNumSpace, HPos.CENTER);
+		GridPane.setHalignment(availableRooms, HPos.CENTER);
+		//GridPane.setHalignment(clear, HPos.CENTER);
+		//GridPane.setHalignment(book, HPos.CENTER);
+		//GridPane.setHalignment(backToLogIn, HPos.CENTER);
+		
+		inputPane.add(roomType,    	  0,0,1,1);
+		inputPane.add(roomTypeBox,    1,0,1,1);
+		
+		inputPane.add(numOfGuests,    	0,1,1,1);
+		inputPane.add(numOfGuestBox,    1,1,1,1);
+		
+		inputPane.add(checkInDate,    	0,2,1,1);
+		inputPane.add(box,    			1,2,1,1);
+		
+		inputPane.add(numDays,    	  0,3,1,1);
+		inputPane.add(numDaysSpace,   1,3,1,1);
+		
+		inputPane.add(roomNum,    	  0,4,1,1);
+		inputPane.add(roomNumSpace,   1,4,1,1);
+		inputPane.add(availableRooms,   2,4,1,1);
+		
+		inputPane.add(clear,  		0,5,1,1);
+		inputPane.add(book,   		1,5,1,1);
+		inputPane.add(backToLogIn,  2,5,1,1);
+		
+		inputPane1.add(intro,    	 0,0,1,1);
+		inputPane1.add(inputPane,    0,1,1,1);
+		
+		
+		inputPane.setHalignment(intro, HPos.CENTER);
+		inputPane.setHalignment(roomType, HPos.CENTER);
+		inputPane.setHalignment(numOfGuests, HPos.CENTER);
+		inputPane.setHalignment(roomNum, HPos.CENTER);
+		inputPane.setHalignment(roomTypeBox, HPos.CENTER);
+		inputPane.setHalignment(checkInDate, HPos.CENTER);
+		inputPane.setHalignment(box, HPos.CENTER);
+		inputPane.setHalignment(numOfGuestBox, HPos.CENTER);
+		inputPane.setHalignment(numDays, HPos.CENTER);
+		inputPane.setHalignment(numDaysSpace, HPos.CENTER);
+		inputPane.setHalignment(roomNumSpace, HPos.CENTER);
+		inputPane.setHalignment(availableRooms, HPos.CENTER);
+		//inputPane.setHalignment(clear, HPos.CENTER);
+		//inputPane.setHalignment(book, HPos.CENTER);
+		//inputPane.setHalignment(backToLogIn, HPos.CENTER);
+		
+		mainPane.add(inputPane1,   0,0,1,1);
+		
+		inputPane.setHgap(30);
+		inputPane.setVgap(30);
+		inputPane1.setHgap(30);
+		inputPane1.setVgap(30);
+		mainPane.setVgap(30);
+		
+		Scene scene = new Scene(mainPane, 930, 930);
+		window.setScene(scene);
+		window.show();
+
 	}
 	
+	private Text line;
 	private Text line1;
 	private Text line2;
 	private Text line3;
@@ -566,110 +865,414 @@ public class HotelManagement extends Application
 		
 		totalPrice = priceForRoom * days;
 		
-		line1 = new Text("Welcome to Hotel Panthera");
-		line1.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		line = new Text("BOOKING CONFIRMED");
+		line.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 60));
+		
+		line1 = new Text("\nWelcome to Hotel Panthera");
+		line1.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		
 		if (op.equals("Standard Suite"))
 		{
-			line2 = new Text ("Thank you foer booking a Standard Suite with us\n");
-			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+			line2 = new Text ("Thank you for booking a Standard Suite with us");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		}
 			
 		if (op.equals("Junior Suite"))
 		{
-			line2 = new Text ("Thank you foer booking a Junior Suite with us\n");
-			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+			line2 = new Text ("Thank you for booking a Junior Suite with us");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		}
 		
 		if (op.equals("Presidential Suite"))
 		{
-			line2 = new Text ("Thank you foer booking a Presidential Suite with us\n");
-			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+			line2 = new Text ("Thank you for booking a Presidential Suite with us");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		}
 		
 		if (op.equals("Penthouse Suite"))
 		{
-			line2 = new Text ("Thank you foer booking a Penthouse Suite with us\n");
-			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+			line2 = new Text ("Thank you for booking a Penthouse Suite with us");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		}
 		
 		if (op.equals("Honeymoon Suite"))
 		{
-			line2 = new Text ("Thank you foer booking a Honeymoon Suite with us\n");
-			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+			line2 = new Text ("Thank you for booking a Honeymoon Suite with us");
+			line2.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		}
 		
-		line3 = new Text("Price for your stay is " + totalPrice);
-		line3.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
+		line3 = new Text("Price for your stay is $" + totalPrice);
+		line3.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
 		
-		GridPane mainPane  = new GridPane();
+		Button backToLogIn = new Button ("Back to LogIn Page");
+		backToLogIn.setPrefWidth(200);
+    	backToLogIn.setPrefHeight(30);
+    	backToLogIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		backToLogIn.setOnAction(this::processBackToLogInButton);
+		
+		GridPane inputPane = new GridPane();
+	 	GridPane inputPane1 = new GridPane();
+    	GridPane mainPane  = new GridPane();
+		
+		inputPane.setAlignment(Pos.CENTER);
+    	inputPane1.setAlignment(Pos.CENTER);
 		mainPane.setAlignment(Pos.CENTER);
 		
-		mainPane.add(line1,     0,0,1,1);
-		mainPane.add(line2,     0,1,1,1);
-		mainPane.add(line3,     0,2,1,1);
+		inputPane.add(line1,     	0,0,1,1);
+		inputPane.add(line2,     	0,1,1,1);
+		inputPane.add(line3,     	0,2,1,1);
+		inputPane.add(backToLogIn,  0,3,1,1);
 		
-		mainPane.setVgap(40);
+		inputPane1.add(line,    	 0,0,1,1);
+		inputPane1.add(inputPane,    0,1,1,1);
+		
+		mainPane.add(inputPane1,   0,0,1,1);
+		
+		inputPane.setHgap(30);
+		inputPane.setVgap(30);
+		inputPane1.setHgap(30);
+		inputPane1.setVgap(70);
+		mainPane.setVgap(30);
 		
 		Scene scene = new Scene(mainPane, 900, 900);
 		window.setScene(scene);
 		window.show();
 	}
 	
-	public void processAvailableRoomButton(ActionEvent event)
+	public void processBackToLogInButton(ActionEvent event)
 	{
+		Text userName = new Text ("Username: ");
+		userName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
+	 	nameSpace = new TextField();
+	 	nameSpace.setPrefWidth(200);
+	 	nameSpace.setPrefHeight(40);
+	    
+	    
+	  	Text password = new Text ("Password: ");
+	  	password.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
+    	passwordSpace = new TextField();
+    	passwordSpace.setPrefWidth(200);
+    	passwordSpace.setPrefHeight(40);
+    	
+    	Button back = new Button ("Return");
+    	back.setPrefWidth(150);
+    	back.setPrefHeight(30);
+    	back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		back.setOnAction(this::processReturnButton);
+		
+		Button enter = new Button ("Enter");
+    	enter.setPrefWidth(150);
+    	enter.setPrefHeight(30);
+    	enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		enter.setOnAction(this::processEnterButtonForLogIn);
+		
+		GridPane inputPane = new GridPane();
+    	GridPane mainPane  = new GridPane();
+    	
+    	inputPane.setAlignment(Pos.CENTER);
+		mainPane.setAlignment(Pos.CENTER);
+		
+		
+		GridPane.setHalignment(userName, HPos.CENTER);
+		GridPane.setHalignment(nameSpace, HPos.CENTER);
+		
+		GridPane.setHalignment(password, HPos.CENTER);
+		GridPane.setHalignment(passwordSpace, HPos.CENTER);
+		
+		GridPane.setHalignment(back, HPos.CENTER);
+		GridPane.setHalignment(enter, HPos.CENTER);
+		
+		
+		inputPane.add(userName,    0,0,1,1);
+		inputPane.add(nameSpace,	1,0,1,1);
+		
+		inputPane.add(password,      0,1,1,1);
+		inputPane.add(passwordSpace, 1,1,1,1);
+		
+		inputPane.add(back,    0,2,1,1);
+		inputPane.add(enter, 	1,2,1,1);
+		
+		mainPane.add(inputPane,   0,0,1,1);
+		
+		inputPane.setHgap(40);
+		inputPane.setVgap(40);
+		mainPane.setVgap(40);
+		
+		Scene scene = new Scene(mainPane, 900, 900);
+		window.setScene(scene);
+		window.show();
+		
+		
+	}
 	
+	public void processAvailableRoomButtonforUser(ActionEvent event)
+	{
+		TableView<Room> table1 = new TableView<Room>();
+ 			final ObservableList<Room> data1 =
+         		FXCollections.observableArrayList(
+            	new Room(1,"Presidential Suite","Yes"),
+             	new Room(2,"Honeymoon Suite","Yes"),
+             	new Room(3,"Junior Suite","Yes"),
+             	new Room(4,"Standard Suite","Yes"),
+             	new Room(5,"Penthouse Suite","Yes")
+         	);
+ 
+    		HBox hb = new HBox();
+ 
+        	final Label label = new Label("AVAILABLE ROOMS");
+        	label.setFont(new Font("Arial", 20));
+ 
+        	table1.setEditable(true);
+        	
+        	TableColumn roomNumberCol = new TableColumn("Room Number");
+        	roomNumberCol.setMinWidth(200);
+        	roomNumberCol.setCellValueFactory(
+             	   new PropertyValueFactory<Room, Integer>("roomNumber"));
+             	   
+            TableColumn roomTypeCol = new TableColumn("Room Type");
+        	roomTypeCol.setMinWidth(200);
+        	roomTypeCol.setCellValueFactory(
+             	   new PropertyValueFactory<Room, String>("roomType"));
+ 
+            TableColumn availabilityCol = new TableColumn("Availability");
+        	availabilityCol.setMinWidth(200);
+        	availabilityCol.setCellValueFactory(
+             	   new PropertyValueFactory<Room, String>("availability"));
+             	   
+            						  
+        	Button back = new Button ("Back");
+    		back.setPrefWidth(150);
+    		back.setPrefHeight(30);
+    		back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			back.setOnAction(this::processBackButtonForAvailableRoomForUser);
+        	
+ 			hb.getChildren().addAll(back);
+       		hb.setSpacing(3);
+             	   
+        	table1.setItems(data1);
+        	table1.getColumns().addAll(roomNumberCol, roomTypeCol, availabilityCol);
+ 
+        	final VBox vbox = new VBox();
+        	vbox.setSpacing(5);
+        	vbox.setPadding(new Insets(10, 0, 0, 10));
+        	vbox.getChildren().addAll(label, table1, hb);
+ 
+ 			Scene scene = new Scene(new Group());
+ 			((Group) scene.getRoot()).getChildren().addAll(vbox);
+        	window.setScene(scene);
+			window.show();
+    
+	}
+	
+	public void processBackButtonForAvailableRoomForUser(ActionEvent event)
+	{
+		intro = new Text("Room Selection");
+		intro.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 60));
+		
+		roomType = new Text("Room Type:");
+		roomType.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		
+		numOfGuests = new Text("Number of Guests:");
+		numOfGuests.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		
+		checkInDate = new Text("Check In Date:");
+		checkInDate.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		
+		roomNum = new Text("Room Number:");
+		roomNum.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		roomNumSpace = new TextField();
+	 	roomNumSpace.setPrefWidth(200);
+	 	roomNumSpace.setPrefHeight(40);
+	 	
+	 	numDays = new Text("Number of days of stay:");
+		numDays.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 40));
+		numDaysSpace = new TextField();
+	 	numDaysSpace.setPrefWidth(200);
+	 	numDaysSpace.setPrefHeight(40);
+		
+		Button clear = new Button ("Clear");
+		clear.setPrefWidth(150);
+    	clear.setPrefHeight(30);
+    	clear.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		clear.setOnAction(this::processClearButton);
+		
+		Button book = new Button ("Book");
+		book.setPrefWidth(150);
+    	book.setPrefHeight(30);
+    	book.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		book.setOnAction(this::processBookButton);
+		
+		Button availableRooms = new Button ("Rooms");
+		availableRooms.setPrefWidth(150);
+    	availableRooms.setPrefHeight(30);
+    	availableRooms.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		availableRooms.setOnAction(this::processAvailableRoomButton);
+		
+		Button backToLogIn = new Button ("Back");
+		backToLogIn.setPrefWidth(150);
+    	backToLogIn.setPrefHeight(30);
+    	backToLogIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		backToLogIn.setOnAction(this::processBackToLogInButton);
+		
+		
+		roomTypeBox = new ComboBox<String>();
+        roomTypeBox.getItems().add("Standard Suite");
+        roomTypeBox.getItems().add("Junior Suite");
+        roomTypeBox.getItems().add("Presidential Suite");
+        roomTypeBox.getItems().add("Penthouse Suite");
+		roomTypeBox.getItems().add("Honeymoon Suite");
+		
+		numOfGuestBox = new ComboBox<String>();
+		numOfGuestBox.getItems().add("1");
+		numOfGuestBox.getItems().add("2");
+ 		numOfGuestBox.getItems().add("3");
+ 	 	numOfGuestBox.getItems().add("4");
+ 	 	numOfGuestBox.getItems().add("5");
+ 	 	numOfGuestBox.getItems().add("6");
+ 	 	
+ 	 	DatePicker d = new DatePicker();
+ 	 	HBox box = new HBox(5);
+      	box.setPadding(new Insets(15, 50, 50, 50));
+     	box.getChildren().addAll(d);
+	 	
+	 	GridPane inputPane = new GridPane();
+	 	GridPane inputPane1 = new GridPane();
+    	GridPane mainPane  = new GridPane();
+    	
+    	inputPane.setAlignment(Pos.CENTER);
+    	inputPane1.setAlignment(Pos.CENTER);
+		mainPane.setAlignment(Pos.CENTER);
+		
+		GridPane.setHalignment(intro, HPos.CENTER);
+		GridPane.setHalignment(roomType, HPos.CENTER);
+		GridPane.setHalignment(numOfGuests, HPos.CENTER);
+		GridPane.setHalignment(roomNum, HPos.CENTER);
+		GridPane.setHalignment(roomTypeBox, HPos.CENTER);
+		GridPane.setHalignment(checkInDate, HPos.CENTER);
+		GridPane.setHalignment(box, HPos.CENTER);
+		GridPane.setHalignment(numOfGuestBox, HPos.CENTER);
+		GridPane.setHalignment(numDays, HPos.CENTER);
+		GridPane.setHalignment(numDaysSpace, HPos.CENTER);
+		GridPane.setHalignment(roomNumSpace, HPos.CENTER);
+		GridPane.setHalignment(availableRooms, HPos.CENTER);
+		//GridPane.setHalignment(clear, HPos.CENTER);
+		//GridPane.setHalignment(book, HPos.CENTER);
+		//GridPane.setHalignment(backToLogIn, HPos.CENTER);
+		
+		inputPane.add(roomType,    	  0,0,1,1);
+		inputPane.add(roomTypeBox,    1,0,1,1);
+		
+		inputPane.add(numOfGuests,    	0,1,1,1);
+		inputPane.add(numOfGuestBox,    1,1,1,1);
+		
+		inputPane.add(checkInDate,    	0,2,1,1);
+		inputPane.add(box,    			1,2,1,1);
+		
+		inputPane.add(numDays,    	  0,3,1,1);
+		inputPane.add(numDaysSpace,   1,3,1,1);
+		
+		inputPane.add(roomNum,    	  0,4,1,1);
+		inputPane.add(roomNumSpace,   1,4,1,1);
+		inputPane.add(availableRooms,   2,4,1,1);
+		
+		inputPane.add(clear,  		0,5,1,1);
+		inputPane.add(book,   		1,5,1,1);
+		inputPane.add(backToLogIn,  2,5,1,1);
+		
+		inputPane1.add(intro,    	 0,0,1,1);
+		inputPane1.add(inputPane,    0,1,1,1);
+		
+		
+		inputPane.setHalignment(intro, HPos.CENTER);
+		inputPane.setHalignment(roomType, HPos.CENTER);
+		inputPane.setHalignment(numOfGuests, HPos.CENTER);
+		inputPane.setHalignment(roomNum, HPos.CENTER);
+		inputPane.setHalignment(roomTypeBox, HPos.CENTER);
+		inputPane.setHalignment(checkInDate, HPos.CENTER);
+		inputPane.setHalignment(box, HPos.CENTER);
+		inputPane.setHalignment(numOfGuestBox, HPos.CENTER);
+		inputPane.setHalignment(numDays, HPos.CENTER);
+		inputPane.setHalignment(numDaysSpace, HPos.CENTER);
+		inputPane.setHalignment(roomNumSpace, HPos.CENTER);
+		inputPane.setHalignment(availableRooms, HPos.CENTER);
+		//inputPane.setHalignment(clear, HPos.CENTER);
+		//inputPane.setHalignment(book, HPos.CENTER);
+		//inputPane.setHalignment(backToLogIn, HPos.CENTER);
+		
+		mainPane.add(inputPane1,   0,0,1,1);
+		
+		inputPane.setHgap(30);
+		inputPane.setVgap(30);
+		inputPane1.setHgap(30);
+		inputPane1.setVgap(30);
+		mainPane.setVgap(30);
+		
+		Scene scene = new Scene(mainPane, 930, 930);
+		window.setScene(scene);
+		window.show();
+	}
+	
+	public static class Room
+	{
+    		private final SimpleStringProperty availability;
+    		private final SimpleStringProperty roomType;
+    		private final SimpleIntegerProperty roomNumber;
+    
+    		public Room(int roomNumberIn, String roomTypeIn, String availabilityIn)
+    		{
+            	this.availability = new SimpleStringProperty(availabilityIn);
+            	this.roomType = new SimpleStringProperty(roomTypeIn);
+            	this.roomNumber = new SimpleIntegerProperty(roomNumberIn);
+    		}
+    		
+    		public String getAvailability()
+    		{	return availability.get();
+    		}
+    		
+    		public String getRoomType()
+    		{	return roomType.get();
+    		}
+    		
+    		public int getRoomNumber()
+    		{	return roomNumber.get();
+    		}
+
 	}
 	
 	
 	public void processBookingButton(ActionEvent event)
 	{
-		class TableViewSample extends Application {
+			TableView<Reservation> table = new TableView<Reservation>();
+ 			final ObservableList<Reservation> data =
+         		FXCollections.observableArrayList(
+            	new Reservation(1,1,1,"1 May, 2021","3 May, 2021", 2000),
+             	new Reservation(2,2,2,"2 May, 2021","4 May, 2021", 2100),
+             	new Reservation(3,3,3,"3 May, 2021","5 May, 2021", 2200),
+             	new Reservation(4,4,4,"4 May, 2021","6 May, 2021", 2300),
+             	new Reservation(5,5,5,"5 May, 2021","7 May, 2021", 2400)
+         	);
  
-   		 	private TableView table = new TableView();
-//     		private final ObservableList<Reservation> data =
-//         		FXCollections.observableArrayList(
-//            		new Reservation(1,1,1,"1 May, 2021","3 May, 2021", 2000),
-//            	 	new Reservation(2,2,2,"2 May, 2021","4 May, 2021", 2100),
-//             	new Reservation(3,3,3,"3 May, 2021","5 May, 2021", 2200),
-//             	new Reservation(4,4,4,"4 May, 2021","6 May, 2021", 2300),
-//             	new Reservation(5,5,5,"5 May, 2021","7 May, 2021", 2400)
-//         	);
- 
-    	@Override
-    	public void start(Stage stage) {
-        	Scene scene = new Scene(new Group());
-        	stage.setTitle("Admin Page");
-        	stage.setWidth(450);
-        	stage.setHeight(500);
+    		HBox hb = new HBox();
  
         	final Label label = new Label("BOOKINGS");
         	label.setFont(new Font("Arial", 20));
  
         	table.setEditable(true);
-        	
-        	TableColumn userIdCol = new TableColumn("User Id");
-        	TableColumn roomIdCol = new TableColumn("Room Id");
-        	TableColumn roomNumberCol = new TableColumn("Room Number");
-        	TableColumn dateInCol = new TableColumn("Check In Date");
-        	TableColumn dateOutCol = new TableColumn("Check Out Date");
-        	TableColumn invoiceIdCol = new TableColumn("Invoice Id");
  
- /**
         	TableColumn userIdCol = new TableColumn("User Id");
         	userIdCol.setMinWidth(100);
         	userIdCol.setCellValueFactory(
-            	    new PropertyValueFactory<Reservation, int>("userId"));
+            	    new PropertyValueFactory<Reservation, Integer>("userId"));
  
         	TableColumn roomIdCol = new TableColumn("Room Id");
         	roomIdCol.setMinWidth(100);
         	roomIdCol.setCellValueFactory(
-            	    new PropertyValueFactory<Reservation, int>("roomId"));
+            	    new PropertyValueFactory<Reservation, Integer>("roomId"));
  
         	TableColumn roomNumberCol = new TableColumn("Room Number");
         	roomNumberCol.setMinWidth(200);
         	roomNumberCol.setCellValueFactory(
-             	   new PropertyValueFactory<Reservation, int>("roomNumber"));
+             	   new PropertyValueFactory<Reservation, Integer>("roomNumber"));
              	   
             TableColumn dateInCol = new TableColumn("Check In Date");
         	dateInCol.setMinWidth(200);
@@ -684,34 +1287,72 @@ public class HotelManagement extends Application
             TableColumn invoiceIdCol = new TableColumn("Invoice Id");
         	invoiceIdCol.setMinWidth(200);
         	invoiceIdCol.setCellValueFactory(
-             	   new PropertyValueFactory<Reservation, int>("invoiceId"));
-*/
+             	   new PropertyValueFactory<Reservation, Integer>("invoiceId"));
+
  
-        	//table.setItems(data);
-        	//table.getColumns().addAll(userIdCol, roomIdCol, roomNumberCol, 
-        							  //dateInCol, dateOutCol, invoiceIdCol);
- 
+        	table.setItems(data);
+        	table.getColumns().addAll(userIdCol, roomIdCol, roomNumberCol, 
+        							  dateInCol, dateOutCol, invoiceIdCol);
+        							  
+        	Button back = new Button ("Back");
+    		back.setPrefWidth(150);
+    		back.setPrefHeight(30);
+    		back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			back.setOnAction(this::processBackButtonForBooking);
+        	
+ 			hb.getChildren().addAll(back);
+       		hb.setSpacing(3);
+ 			
         	final VBox vbox = new VBox();
         	vbox.setSpacing(5);
         	vbox.setPadding(new Insets(10, 0, 0, 10));
-        	vbox.getChildren().addAll(label, table);
+        	vbox.getChildren().addAll(label, table, hb);
  
-        	((Group) scene.getRoot()).getChildren().addAll(vbox);
- 
+ 			Scene scene = new Scene(new Group());
+ 			((Group) scene.getRoot()).getChildren().addAll(vbox);
         	window.setScene(scene);
 			window.show();
-    	}
-    	
-    	class Reservation
-		{
-			private SimpleIntegerProperty userId;
-    		private SimpleIntegerProperty roomId;
-    		private SimpleIntegerProperty roomNumber;
-    		private SimpleStringProperty dateIn;
-    		private SimpleStringProperty dateOut;
-    		private SimpleIntegerProperty invoiceId;
     
-    		public Reservation(int useridIn, int roomIdIn, int roomNumberIn, String dateInIn, String dateOutIn, int invoiceIdIn)
+
+	}
+	
+	public void processBackButtonForBooking(ActionEvent event)
+	{
+		availableRooms = new Button ("Available Rooms");
+		availableRooms.setPrefWidth(300);
+		availableRooms.setOnAction(this::processAvailableRoomButtonForAdmin);
+		
+		bookings = new Button ("Bookings");
+		bookings.setPrefWidth(300);
+		bookings.setOnAction(this::processBookingButton);
+		
+		GridPane mainPane  = new GridPane();
+		mainPane.setAlignment(Pos.TOP_LEFT);
+		
+		GridPane.setHalignment(availableRooms, HPos.LEFT);
+		GridPane.setHalignment(bookings, HPos.LEFT);
+		
+		mainPane.add(availableRooms,    0,0,1,1);
+		mainPane.add(bookings,     		1,0,1,1);
+		
+		mainPane.setVgap(40);
+		
+		Scene scene = new Scene(mainPane, 900, 900);
+		window.setScene(scene);
+		window.show();
+	}
+	
+	public static class Reservation
+	{
+			private final SimpleIntegerProperty userId;
+    		private final SimpleIntegerProperty roomId;
+    		private final SimpleIntegerProperty roomNumber;
+    		private final SimpleStringProperty dateIn;
+    		private final SimpleStringProperty dateOut;
+    		private final SimpleIntegerProperty invoiceId;
+    
+    		public Reservation(int useridIn, int roomIdIn, int roomNumberIn, 
+    		String dateInIn, String dateOutIn, int invoiceIdIn)
     		{
 				this.userId = new SimpleIntegerProperty(useridIn);
            	 	this.roomId = new SimpleIntegerProperty(roomIdIn);
@@ -721,24 +1362,30 @@ public class HotelManagement extends Application
             	this.invoiceId = new SimpleIntegerProperty(invoiceIdIn);
     		}
     		
-    		/**
-    		public int addReservation(int useridIn)
-			{
-				return useridIn;
-			}
-	
-    		public void editReservation(int useridIn)
-			{
-				userId = useridIn;
-			}
-	
-			public void deleteReservation(int useridIn)
-			{
-				useridIn = null;
-			}
-			*/
+    		public int getUserId()
+    		{	return userId.get();
+    		}
+    		
+    		public int getRoomId()
+    		{	return roomId.get();
+    		}
+    		
+    		public int getRoomNumber()
+    		{	return roomNumber.get();
+    		}
+    		
+    		public String getDateIn()
+    		{	return dateIn.get();
+    		}
+    		
+    		public String getDateOut()
+    		{	return dateOut.get();
+    		}
+    		
+    		public int getInvoiceId()
+    		{	return invoiceId.get();
+    		}
 
-		}
 	}
-}
+
 }
