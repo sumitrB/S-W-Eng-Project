@@ -9,15 +9,15 @@ import javafx.scene.text.*;
 import javafx.geometry.*;	
 import javafx.event.ActionEvent;
 import javafx.scene.text.FontWeight; 
-import javafx.scene.text.FontWeight;
 import java.time.LocalDate;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
- 
 import java.sql.*;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class HotelManagement extends Application 
 {
@@ -508,9 +508,33 @@ public class HotelManagement extends Application
 	
 	}
 	
+	Button availableRooms;
+	Button bookings;
+	
 	public void processEnterButtonForAdminLogIn(ActionEvent event)
 	{	
+		availableRooms = new Button ("Available Rooms");
+		availableRooms.setPrefWidth(300);
+		availableRooms.setOnAction(this::processAvailableRoomButton);
 		
+		bookings = new Button ("Bookings");
+		bookings.setPrefWidth(300);
+		bookings.setOnAction(this::processBookingButton);
+		
+		GridPane mainPane  = new GridPane();
+		mainPane.setAlignment(Pos.TOP_LEFT);
+		
+		GridPane.setHalignment(availableRooms, HPos.LEFT);
+		GridPane.setHalignment(bookings, HPos.LEFT);
+		
+		mainPane.add(availableRooms,    0,0,1,1);
+		mainPane.add(bookings,     		1,0,1,1);
+		
+		mainPane.setVgap(40);
+		
+		Scene scene = new Scene(mainPane, 900, 900);
+		window.setScene(scene);
+		window.show();
 	}
 	
 	public void processClearButton(ActionEvent event)
@@ -592,7 +616,129 @@ public class HotelManagement extends Application
 		window.show();
 	}
 	
+	public void processAvailableRoomButton(ActionEvent event)
+	{
+	
+	}
 	
 	
+	public void processBookingButton(ActionEvent event)
+	{
+		class TableViewSample extends Application {
+ 
+   		 	private TableView table = new TableView();
+//     		private final ObservableList<Reservation> data =
+//         		FXCollections.observableArrayList(
+//            		new Reservation(1,1,1,"1 May, 2021","3 May, 2021", 2000),
+//            	 	new Reservation(2,2,2,"2 May, 2021","4 May, 2021", 2100),
+//             	new Reservation(3,3,3,"3 May, 2021","5 May, 2021", 2200),
+//             	new Reservation(4,4,4,"4 May, 2021","6 May, 2021", 2300),
+//             	new Reservation(5,5,5,"5 May, 2021","7 May, 2021", 2400)
+//         	);
+ 
+    	@Override
+    	public void start(Stage stage) {
+        	Scene scene = new Scene(new Group());
+        	stage.setTitle("Admin Page");
+        	stage.setWidth(450);
+        	stage.setHeight(500);
+ 
+        	final Label label = new Label("BOOKINGS");
+        	label.setFont(new Font("Arial", 20));
+ 
+        	table.setEditable(true);
+        	
+        	TableColumn userIdCol = new TableColumn("User Id");
+        	TableColumn roomIdCol = new TableColumn("Room Id");
+        	TableColumn roomNumberCol = new TableColumn("Room Number");
+        	TableColumn dateInCol = new TableColumn("Check In Date");
+        	TableColumn dateOutCol = new TableColumn("Check Out Date");
+        	TableColumn invoiceIdCol = new TableColumn("Invoice Id");
+ 
+ /**
+        	TableColumn userIdCol = new TableColumn("User Id");
+        	userIdCol.setMinWidth(100);
+        	userIdCol.setCellValueFactory(
+            	    new PropertyValueFactory<Reservation, int>("userId"));
+ 
+        	TableColumn roomIdCol = new TableColumn("Room Id");
+        	roomIdCol.setMinWidth(100);
+        	roomIdCol.setCellValueFactory(
+            	    new PropertyValueFactory<Reservation, int>("roomId"));
+ 
+        	TableColumn roomNumberCol = new TableColumn("Room Number");
+        	roomNumberCol.setMinWidth(200);
+        	roomNumberCol.setCellValueFactory(
+             	   new PropertyValueFactory<Reservation, int>("roomNumber"));
+             	   
+            TableColumn dateInCol = new TableColumn("Check In Date");
+        	dateInCol.setMinWidth(200);
+        	dateInCol.setCellValueFactory(
+             	   new PropertyValueFactory<Reservation, String>("dateIn"));
+             	   
+            TableColumn dateOutCol = new TableColumn("Check Out Date");
+        	dateOutCol.setMinWidth(200);
+        	dateOutCol.setCellValueFactory(
+             	   new PropertyValueFactory<Reservation, String>("dateOut"));
+             	   
+            TableColumn invoiceIdCol = new TableColumn("Invoice Id");
+        	invoiceIdCol.setMinWidth(200);
+        	invoiceIdCol.setCellValueFactory(
+             	   new PropertyValueFactory<Reservation, int>("invoiceId"));
+*/
+ 
+        	//table.setItems(data);
+        	//table.getColumns().addAll(userIdCol, roomIdCol, roomNumberCol, 
+        							  //dateInCol, dateOutCol, invoiceIdCol);
+ 
+        	final VBox vbox = new VBox();
+        	vbox.setSpacing(5);
+        	vbox.setPadding(new Insets(10, 0, 0, 10));
+        	vbox.getChildren().addAll(label, table);
+ 
+        	((Group) scene.getRoot()).getChildren().addAll(vbox);
+ 
+        	window.setScene(scene);
+			window.show();
+    	}
+    	
+    	class Reservation
+		{
+			private SimpleIntegerProperty userId;
+    		private SimpleIntegerProperty roomId;
+    		private SimpleIntegerProperty roomNumber;
+    		private SimpleStringProperty dateIn;
+    		private SimpleStringProperty dateOut;
+    		private SimpleIntegerProperty invoiceId;
+    
+    		public Reservation(int useridIn, int roomIdIn, int roomNumberIn, String dateInIn, String dateOutIn, int invoiceIdIn)
+    		{
+				this.userId = new SimpleIntegerProperty(useridIn);
+           	 	this.roomId = new SimpleIntegerProperty(roomIdIn);
+            	this.roomNumber = new SimpleIntegerProperty(roomNumberIn);
+            	this.dateIn = new SimpleStringProperty(dateInIn);
+            	this.dateOut = new SimpleStringProperty(dateOutIn);
+            	this.invoiceId = new SimpleIntegerProperty(invoiceIdIn);
+    		}
+    		
+    		/**
+    		public int addReservation(int useridIn)
+			{
+				return useridIn;
+			}
+	
+    		public void editReservation(int useridIn)
+			{
+				userId = useridIn;
+			}
+	
+			public void deleteReservation(int useridIn)
+			{
+				useridIn = null;
+			}
+			*/
 
+		}
+	}
+}
 }
