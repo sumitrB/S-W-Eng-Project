@@ -39,7 +39,7 @@ public class HelloApplication extends Application
     private Text userName;
     private Text password;
     private TextField nameSpace;
-    private TextField passwordSpace;
+    private PasswordField passwordSpace;
 
 
     // If create new account;
@@ -48,15 +48,15 @@ public class HelloApplication extends Application
     private Text insertPassword;
     private Text confirmPassword;
     private TextField userIdSpace;
-    private TextField insertPasswordSpace;
-    private TextField confirmPasswordSpace;
+    private PasswordField insertPasswordSpace;
+    private PasswordField confirmPasswordSpace;
 
     // If AdminlogIn;
 
     private Text adminUserName;
     private Text adminPassword;
     private TextField adminNameSpace;
-    private TextField adminPasswordSpace;
+    private PasswordField adminPasswordSpace;
 
     //If HotelBooking
 
@@ -80,23 +80,6 @@ public class HelloApplication extends Application
     public void start(Stage primaryStage) throws FileNotFoundException {
         window = primaryStage;
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hsm", "root", "SumitrBanik00");
-
-            Statement s = con.createStatement();
-            String sql = "select U_Password from Users where Username = \"jojo\";";
-            ResultSet r=s.executeQuery(sql);
-            r.next();
-            String realPass = r.getString("U_Password");
-            System.out.println(realPass);
-            s.close();
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         String imagePath = "panthera.png";
         Image image = new Image(new FileInputStream(imagePath));
         ImageView view = new ImageView(image);
@@ -127,7 +110,6 @@ public class HelloApplication extends Application
         adminLogIn.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
         adminLogIn.setOnAction(this::processAdminLogInButton);
 
-
         GridPane mainPane  = new GridPane();
         mainPane.setAlignment(Pos.CENTER);
 
@@ -146,7 +128,6 @@ public class HelloApplication extends Application
         mainPane.setVgap(40);
 
         Scene scene = new Scene(mainPane, 900, 900);
-//        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("style.css")).toExternalForm());
         window.setScene(scene);
         window.show();
 
@@ -159,13 +140,14 @@ public class HelloApplication extends Application
         nameSpace = new TextField();
         nameSpace.setPrefWidth(200);
         nameSpace.setPrefHeight(40);
-
+        nameSpace.setPromptText("Your Username");
 
         Text password = new Text ("Password: ");
         password.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        passwordSpace = new TextField();
+        passwordSpace = new PasswordField();
         passwordSpace.setPrefWidth(200);
         passwordSpace.setPrefHeight(40);
+        passwordSpace.setPromptText("Your Password");
 
         Button back = new Button ("Return");
         back.setPrefWidth(150);
@@ -177,7 +159,6 @@ public class HelloApplication extends Application
         enter.setPrefWidth(150);
         enter.setPrefHeight(30);
         enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
-
 
         enter.setOnAction(e -> {
             //Retrieving data
@@ -219,7 +200,6 @@ public class HelloApplication extends Application
         inputPane.setAlignment(Pos.CENTER);
         mainPane.setAlignment(Pos.CENTER);
 
-
         GridPane.setHalignment(userName, HPos.CENTER);
         GridPane.setHalignment(nameSpace, HPos.CENTER);
 
@@ -259,19 +239,21 @@ public class HelloApplication extends Application
         userIdSpace = new TextField();
         userIdSpace.setPrefWidth(200);
         userIdSpace.setPrefHeight(40);
+        userIdSpace.setPromptText("Enter Username");
 
         Text insertPassword = new Text ("Password: ");
         insertPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        insertPasswordSpace = new TextField();
+        insertPasswordSpace = new PasswordField();
         insertPasswordSpace.setPrefWidth(200);
         insertPasswordSpace.setPrefHeight(40);
+        insertPasswordSpace.setPromptText("Enter Password");
 
         Text confirmPassword = new Text ("Confirm Password: ");
         confirmPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        confirmPasswordSpace = new TextField();
+        confirmPasswordSpace = new PasswordField();
         confirmPasswordSpace.setPrefWidth(200);
         confirmPasswordSpace.setPrefHeight(40);
-
+        confirmPasswordSpace.setPromptText("Confirm");
         Button back = new Button ("Return");
         back.setPrefWidth(150);
         back.setPrefHeight(30);
@@ -368,14 +350,16 @@ public class HelloApplication extends Application
         adminNameSpace = new TextField();
         adminNameSpace.setPrefWidth(200);
         adminNameSpace.setPrefHeight(40);
+        adminNameSpace.setPromptText("Your Username");
 
         Text adminPassword = new Text ("Password: ");
         adminPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        adminPasswordSpace = new TextField();
+        adminPasswordSpace = new PasswordField();
         adminPasswordSpace.setPrefWidth(200);
         adminPasswordSpace.setPrefHeight(40);
+        adminPasswordSpace.setPromptText("Your password");
 
-        Button back = new Button ("Return");
+        Button back = new Button ("Back");
         back.setPrefWidth(150);
         back.setPrefHeight(30);
         back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -385,8 +369,39 @@ public class HelloApplication extends Application
         enter.setPrefWidth(150);
         enter.setPrefHeight(30);
         enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        enter.setOnAction(this::processEnterButtonForAdminLogIn);
+        enter.setOnAction(e -> {
+            //Retrieving data
+            String adminName = adminNameSpace.getText();
+            String pass = adminPasswordSpace.getText();
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/hsm", "root", "SumitrBanik00");
 
+                Statement s = con.createStatement();
+                String sql = "select A_Password from Admins where AdUsername = \""+ adminName +"\";";
+                ResultSet r=s.executeQuery(sql);
+                r.next();
+                String realPass = r.getString("A_Password");
+
+                System.out.println("Check Successful");
+
+                if(realPass.equals(pass)){
+                    processEnterButtonForAdminLogIn(e);
+                }
+                else {
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setHeaderText("Input not valid");
+                    errorAlert.setContentText("Passwords Dont Match");
+                    errorAlert.showAndWait();
+                }
+                s.close();
+                con.close();
+            } catch (SQLException er) {
+                er.printStackTrace();
+            } catch (ClassNotFoundException er) {
+                er.printStackTrace();
+            }
+        });
         GridPane inputPane = new GridPane();
         GridPane mainPane  = new GridPane();
 
@@ -426,8 +441,16 @@ public class HelloApplication extends Application
     }
 
 
-    public void processReturnButton(ActionEvent event)
-    {
+    public void processReturnButton(ActionEvent event) {
+//        String imagePath = "panthera.png";
+//        Image image = new Image(new FileInputStream(imagePath));
+//        ImageView view = new ImageView(image);
+//        view.setX(70);
+//        view.setY(70);
+//        view.setFitHeight(150);
+//        view.setFitWidth(300);
+//        Group root = new Group(view);
+
         Text hotelName = new Text ("PANTHERA");
         hotelName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 30));
 
@@ -446,11 +469,13 @@ public class HelloApplication extends Application
         GridPane mainPane  = new GridPane();
         mainPane.setAlignment(Pos.CENTER);
 
+//        GridPane.setHalignment(root, HPos.CENTER);
         GridPane.setHalignment(hotelName, HPos.CENTER);
         GridPane.setHalignment(logIn, HPos.CENTER);
         GridPane.setHalignment(createAccount, HPos.CENTER);
         GridPane.setHalignment(adminLogIn, HPos.CENTER);
-
+//
+//        mainPane.add(root,    		0,0,1,1);
         mainPane.add(hotelName,     0,0,1,1);
         mainPane.add(logIn,     	0,1,1,1);
         mainPane.add(createAccount, 0,2,1,1);
@@ -506,7 +531,7 @@ public class HelloApplication extends Application
         availableRooms.setPrefWidth(150);
         availableRooms.setPrefHeight(30);
         availableRooms.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
-//        availableRooms.setOnAction(this::processAvailableRoomButtonForUser);
+        availableRooms.setOnAction(this::processAvailableRoomButtonforUser);
 
         Button backToLogIn = new Button ("Back");
         backToLogIn.setPrefWidth(150);
@@ -649,21 +674,125 @@ public class HelloApplication extends Application
     {
         availableRooms = new Button ("Available Rooms");
         availableRooms.setPrefWidth(300);
+        availableRooms.setPrefHeight(50);
         availableRooms.setOnAction(this::processAvailableRoomButtonForAdmin);
 
         bookings = new Button ("Bookings");
         bookings.setPrefWidth(300);
+        bookings.setPrefHeight(50);
         bookings.setOnAction(this::processBookingButton);
 
-        GridPane mainPane  = new GridPane();
-        mainPane.setAlignment(Pos.TOP_LEFT);
+        back = new Button ("Back");
+        back.setPrefWidth(300);
+        back.setPrefHeight(50);
+        back.setOnAction(this::processBackButtonForAdminPage);
 
-        GridPane.setHalignment(availableRooms, HPos.LEFT);
-        GridPane.setHalignment(bookings, HPos.LEFT);
+        GridPane mainPane  = new GridPane();
+        mainPane.setAlignment(Pos.CENTER);
+
+        GridPane.setHalignment(availableRooms, HPos.CENTER);
+        GridPane.setHalignment(bookings, HPos.CENTER);
+        GridPane.setHalignment(back, HPos.CENTER);
 
         mainPane.add(availableRooms,    0,0,1,1);
-        mainPane.add(bookings,     		1,0,1,1);
+        mainPane.add(bookings,     		0,1,1,1);
+        mainPane.add(back,              0,8,1,1);
+        mainPane.setVgap(40);
 
+        Scene scene = new Scene(mainPane, 900, 900);
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void processBackButtonForAdminPage(ActionEvent event)
+    {
+        Text adminUserName = new Text ("Admin name: ");
+        adminUserName.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        adminNameSpace = new TextField();
+        adminNameSpace.setPrefWidth(200);
+        adminNameSpace.setPrefHeight(40);
+        adminNameSpace.setPromptText("Your Username");
+
+        Text adminPassword = new Text ("Password: ");
+        adminPassword.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
+        adminPasswordSpace = new PasswordField();
+        adminPasswordSpace.setPrefWidth(200);
+        adminPasswordSpace.setPrefHeight(40);
+        adminPasswordSpace.setPromptText("Your password");
+
+        Button back = new Button ("Back");
+        back.setPrefWidth(150);
+        back.setPrefHeight(30);
+        back.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        back.setOnAction(this::processReturnButton);
+
+        Button enter = new Button ("Enter");
+        enter.setPrefWidth(150);
+        enter.setPrefHeight(30);
+        enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        enter.setOnAction(e -> {
+            //Retrieving data
+            String adminName = adminNameSpace.getText();
+            String pass = adminPasswordSpace.getText();
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/hsm", "root", "SumitrBanik00");
+
+                Statement s = con.createStatement();
+                String sql = "select A_Password from Admins where AdUsername = \""+ adminName +"\";";
+                ResultSet r=s.executeQuery(sql);
+                r.next();
+                String realPass = r.getString("A_Password");
+
+                System.out.println("Check Successful");
+
+                if(realPass.equals(pass)){
+                    processEnterButtonForAdminLogIn(e);
+                }
+                else {
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setHeaderText("Input not valid");
+                    errorAlert.setContentText("Passwords Dont Match");
+                    errorAlert.showAndWait();
+                }
+                s.close();
+                con.close();
+            } catch (SQLException er) {
+                er.printStackTrace();
+            } catch (ClassNotFoundException er) {
+                er.printStackTrace();
+            }
+        });
+        GridPane inputPane = new GridPane();
+        GridPane mainPane  = new GridPane();
+
+        inputPane.setAlignment(Pos.CENTER);
+        mainPane.setAlignment(Pos.CENTER);
+
+
+        GridPane.setHalignment(adminUserName, HPos.CENTER);
+        GridPane.setHalignment(adminNameSpace, HPos.CENTER);
+
+        GridPane.setHalignment(adminPassword, HPos.CENTER);
+        GridPane.setHalignment(adminPasswordSpace, HPos.CENTER);
+
+        GridPane.setHalignment(back, HPos.CENTER);
+        GridPane.setHalignment(enter, HPos.CENTER);
+
+
+        inputPane.add(adminUserName,    0,0,1,1);
+        inputPane.add(adminNameSpace,	1,0,1,1);
+
+        inputPane.add(adminPassword,      0,1,1,1);
+        inputPane.add(adminPasswordSpace, 1,1,1,1);
+
+        inputPane.add(back,    0,2,1,1);
+        inputPane.add(enter, 	1,2,1,1);
+
+        mainPane.add(inputPane,   0,0,1,1);
+
+        inputPane.setHgap(40);
+        inputPane.setVgap(40);
         mainPane.setVgap(40);
 
         Scene scene = new Scene(mainPane, 900, 900);
@@ -734,21 +863,29 @@ public class HelloApplication extends Application
     {
         availableRooms = new Button ("Available Rooms");
         availableRooms.setPrefWidth(300);
+        availableRooms.setPrefHeight(50);
         availableRooms.setOnAction(this::processAvailableRoomButtonForAdmin);
 
         bookings = new Button ("Bookings");
         bookings.setPrefWidth(300);
+        bookings.setPrefHeight(50);
         bookings.setOnAction(this::processBookingButton);
 
-        GridPane mainPane  = new GridPane();
-        mainPane.setAlignment(Pos.TOP_LEFT);
+        back = new Button ("Back");
+        back.setPrefWidth(300);
+        back.setPrefHeight(50);
+        back.setOnAction(this::processBackButtonForAdminPage);
 
-        GridPane.setHalignment(availableRooms, HPos.LEFT);
-        GridPane.setHalignment(bookings, HPos.LEFT);
+        GridPane mainPane  = new GridPane();
+        mainPane.setAlignment(Pos.CENTER);
+
+        GridPane.setHalignment(availableRooms, HPos.CENTER);
+        GridPane.setHalignment(bookings, HPos.CENTER);
+        GridPane.setHalignment(back, HPos.CENTER);
 
         mainPane.add(availableRooms,    0,0,1,1);
-        mainPane.add(bookings,     		1,0,1,1);
-
+        mainPane.add(bookings,     		0,1,1,1);
+        mainPane.add(back,              0,8,1,1);
         mainPane.setVgap(40);
 
         Scene scene = new Scene(mainPane, 900, 900);
@@ -929,6 +1066,25 @@ public class HelloApplication extends Application
             priceForRoom = 200.0;
 
         totalPrice = priceForRoom * days;
+        String bookingID = userIdSpace.getText() + roomNumSpace.getText();
+
+//        try{
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            con = DriverManager.getConnection("jdbc:mysql://localhost/hsm", "root", "SumitrBanik00");
+//
+//            Statement s = con.createStatement();
+//            String sql = "insert into Reservation values ('" + bookingID + "', '" + checkInDate.getText() + "', '" + roomNumSpace.getText() + "');";
+//            System.out.println(sql);
+//            s.executeUpdate(sql);
+//
+//            System.out.println("Entry Successful");
+//            s.close();
+//            con.close();
+//        } catch (SQLException er) {
+//            er.printStackTrace();
+//        } catch (ClassNotFoundException er) {
+//            er.printStackTrace();
+//        }
 
         line = new Text("BOOKING CONFIRMED");
         line.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 60));
@@ -1011,13 +1167,14 @@ public class HelloApplication extends Application
         nameSpace = new TextField();
         nameSpace.setPrefWidth(200);
         nameSpace.setPrefHeight(40);
-
+        nameSpace.setPromptText("Your Username");
 
         Text password = new Text ("Password: ");
         password.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        passwordSpace = new TextField();
+        passwordSpace = new PasswordField();
         passwordSpace.setPrefWidth(200);
         passwordSpace.setPrefHeight(40);
+        passwordSpace.setPromptText("Your Password");
 
         Button back = new Button ("Return");
         back.setPrefWidth(150);
@@ -1029,14 +1186,46 @@ public class HelloApplication extends Application
         enter.setPrefWidth(150);
         enter.setPrefHeight(30);
         enter.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        enter.setOnAction(this::processEnterButtonForLogIn);
+
+        enter.setOnAction(e -> {
+            //Retrieving data
+            String userN = nameSpace.getText();
+            String pass = passwordSpace.getText();
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/hsm", "root", "SumitrBanik00");
+
+                Statement s = con.createStatement();
+                String sql = "select U_Password from Users where Username = \""+ userN +"\";";
+                ResultSet r=s.executeQuery(sql);
+                r.next();
+                String realPass = r.getString("U_Password");
+
+                System.out.println("Check Successful");
+
+                if(realPass.equals(pass)){
+                    processEnterButtonForLogIn(e);
+                }
+                else {
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setHeaderText("Input not valid");
+                    errorAlert.setContentText("Passwords Dont Match");
+                    errorAlert.showAndWait();
+                }
+                s.close();
+                con.close();
+            } catch (SQLException er) {
+                er.printStackTrace();
+            } catch (ClassNotFoundException er) {
+                er.printStackTrace();
+            }
+        });
 
         GridPane inputPane = new GridPane();
         GridPane mainPane  = new GridPane();
 
         inputPane.setAlignment(Pos.CENTER);
         mainPane.setAlignment(Pos.CENTER);
-
 
         GridPane.setHalignment(userName, HPos.CENTER);
         GridPane.setHalignment(nameSpace, HPos.CENTER);
@@ -1127,6 +1316,7 @@ public class HelloApplication extends Application
         window.setScene(scene);
         window.show();
 
+
     }
 
     public void processBackButtonForAvailableRoomForUser(ActionEvent event)
@@ -1171,7 +1361,7 @@ public class HelloApplication extends Application
         availableRooms.setPrefWidth(150);
         availableRooms.setPrefHeight(30);
         availableRooms.setFont(Font.font("Roboto Blacak", FontWeight.BOLD, FontPosture.REGULAR, 20));
-//        availableRooms.setOnAction(this::processAvailableRoomButton);
+        availableRooms.setOnAction(this::processAvailableRoomButtonforUser);
 
         Button backToLogIn = new Button ("Back");
         backToLogIn.setPrefWidth(150);
@@ -1385,21 +1575,29 @@ public class HelloApplication extends Application
     {
         availableRooms = new Button ("Available Rooms");
         availableRooms.setPrefWidth(300);
+        availableRooms.setPrefHeight(50);
         availableRooms.setOnAction(this::processAvailableRoomButtonForAdmin);
 
         bookings = new Button ("Bookings");
         bookings.setPrefWidth(300);
+        bookings.setPrefHeight(50);
         bookings.setOnAction(this::processBookingButton);
 
-        GridPane mainPane  = new GridPane();
-        mainPane.setAlignment(Pos.TOP_LEFT);
+        back = new Button ("Back");
+        back.setPrefWidth(300);
+        back.setPrefHeight(50);
+        back.setOnAction(this::processBackButtonForAdminPage);
 
-        GridPane.setHalignment(availableRooms, HPos.LEFT);
-        GridPane.setHalignment(bookings, HPos.LEFT);
+        GridPane mainPane  = new GridPane();
+        mainPane.setAlignment(Pos.CENTER);
+
+        GridPane.setHalignment(availableRooms, HPos.CENTER);
+        GridPane.setHalignment(bookings, HPos.CENTER);
+        GridPane.setHalignment(back, HPos.CENTER);
 
         mainPane.add(availableRooms,    0,0,1,1);
-        mainPane.add(bookings,     		1,0,1,1);
-
+        mainPane.add(bookings,     		0,1,1,1);
+        mainPane.add(back,              0,8,1,1);
         mainPane.setVgap(40);
 
         Scene scene = new Scene(mainPane, 900, 900);
